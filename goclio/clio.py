@@ -49,6 +49,7 @@ class BaseApi(object):
 
     def process(self, response):
         if response.ok is True:
+
             self.response = response
             self.response_json = self.response.json()
             return self.response_json
@@ -56,7 +57,7 @@ class BaseApi(object):
         # Handle the bad CLI api implementation of 404 returning HTML and not
         # a valid REST reponse
         #
-        return {'message': response.reason, 'ok': False, 'status_code': response.status_code, 'url': response.url}
+        return {'message': response.reason, 'ok': response.ok, 'status_code': response.status_code, 'url': response.url}
 
     def get(self, **kwargs):
         return self.process(response=self.r.get(self.endpoint(), headers=self.headers(), params=kwargs))
@@ -95,7 +96,8 @@ class Documents(BaseApi):
         return self.response_json.get('document', {}).get('document_versions', self.get().get('document', {}).get('document_versions',[]))
 
     def download_version(self, version_id):
-        return self.DownloadVersion(token=self.token, id=self.response_json.get('document', {}).get('id'), document_version=version_id)
+        download = self.DownloadVersion(token=self.token, id=self.response_json.get('document', {}).get('id'), document_version=version_id)
+        return download.get()
 
     class DownloadVersion(BaseApi):
         uri = 'documents/:id/document_version/:document_version/download'
