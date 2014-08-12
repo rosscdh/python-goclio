@@ -48,9 +48,8 @@ class BaseApi(object):
         return urlparse.urljoin(self.base_url, self.parse_uri, *args, **kwargs)
 
     def process(self, response):
+        self.response = response
         if response.ok is True:
-
-            self.response = response
             self.response_json = self.response.json()
             return self.response_json
         #
