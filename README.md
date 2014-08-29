@@ -1,12 +1,13 @@
 python-goclio
 =============
 
-Python Client for GoClio api
+(in-development) Python Client for GoClio api
 
+Please use in conjunction with https://github.com/rosscdh/python-social-auth.git@backends/goclio (oauth2 implementation for goclio; has a pull request pending on the primary project).
+
+This will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
 ```
-import requests as r
-response = r.get('https://app.goclio.com/api/v2/activities', headers={'Authorization': 'Bearer :token'})
 
 
 from goclio.clio import Me
@@ -46,3 +47,14 @@ from goclio.clio import DocumentCategories
 s=DocumentCategories(token=':token')
 s.get()
 ```
+
+To paginaate and basically do anythign via GET params (as per goclio docs) pass in s.get(offset=2) should act on pagination.
+
+
+ToDo
+----
+
+1. Self contianed session to provideo oauth2 token
+2. Examples of pagination and other api operators
+3. Tests
+4. Better docs
