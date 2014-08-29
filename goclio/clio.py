@@ -9,7 +9,7 @@ class Session(object):
     """
     OAuth2 Session object, provides an access_token
     """
-    site = 'https://app.goclio.com/'
+    site = 'https://app.goclio.com'
     authorization_url = '/oauth/authorize'
     token_url = '/oauth/token'
     response_type = 'code'
