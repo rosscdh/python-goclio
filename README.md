@@ -3,9 +3,11 @@ python-goclio
 
 (in-development) Python Client for GoClio api
 
-Please use in conjunction with https://github.com/rosscdh/python-social-auth.git@backends/goclio (oauth2 implementation for goclio; has a pull request pending on the primary project).
+You are able to use the build in session object which will provide a simple wrapper for getting an OAuth2 token from goclio.
 
-This will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
+Or you can use this module in conjunction with https://github.com/rosscdh/python-social-auth.git@backends/goclio (oauth2 implementation for goclio; has a pull request pending on the primary project).
+
+Either of these processes will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
 ```
 #
@@ -19,10 +21,17 @@ CLIENT_SECRET = ':your_client_secret'
 s = Session(client_id=CLIENT_KEY,
             client_secret=CLIENT_SECRET)
 
+#
+# Follow the url below, complete the process and copy the "code=:code_value" in the url
+# this :code_value is then passed into the s.token_from_code(code=:code_value)
+#
 print s.auth_url
 >>> 'https://app.goclio.com//oauth/authorize?scope=%2Foauth%2Fauthorize&redirect_uri=None&response_type=code&client_id=:your_client_id'
 
+s.access_token  # Will give you access to the token
+# or 
 token = s.token_from_code(code='xrwrfDHdHtOYLs2NZejJ')
+
 
 #
 # Use the token provided above to use the api in the following manner
@@ -73,7 +82,6 @@ To paginate and basically do anythign via GET params (as per goclio api docs) pa
 ToDo
 ----
 
-1. Self contained session to provideo oauth2 token
+1. ~~Self contained session to provideo oauth2 token~~
 2. Examples of pagination and other api operators
 3. Tests
-4. Better docs
