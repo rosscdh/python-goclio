@@ -8,8 +8,6 @@ Please use in conjunction with https://github.com/rosscdh/python-social-auth.git
 This will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
 ```
-
-
 from goclio.clio import Me
 s=Me(token=':token')
 s.get()
@@ -48,13 +46,13 @@ s=DocumentCategories(token=':token')
 s.get()
 ```
 
-To paginaate and basically do anythign via GET params (as per goclio docs) pass in s.get(offset=2) should act on pagination.
+To paginate and basically do anythign via GET params (as per goclio api docs) pass in the desired param arguments as keyword arguments i.e. "s.get(offset=2)".
 
 
 ToDo
 ----
 
-1. Self contianed session to provideo oauth2 token
+1. Self contained session to provideo oauth2 token
 2. Examples of pagination and other api operators
 3. Tests
 4. Better docs
