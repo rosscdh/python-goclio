@@ -9,6 +9,22 @@ Or you can use this module in conjunction with https://github.com/rosscdh/python
 
 Either of these processes will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
+Installation
+------------
+
+```
+python setup.py install
+```
+
+or
+
+```
+git clone https://github.com/rosscdh/python-goclio.git
+cd python-goclio
+pip install -r requirements.txt
+```
+
+
 ```
 #
 # Create an OAuth2 Session token
