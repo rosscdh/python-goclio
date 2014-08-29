@@ -6,13 +6,17 @@ import urlparse
 from requests_oauth2 import OAuth2
 
 class Session(object):
+    """
+    OAuth2 Session object, provides an access_token
+    """
     site = 'https://app.goclio.com/'
     authorization_url = '/oauth/authorize'
     token_url = '/oauth/token'
     response_type = 'code'
-    token = None
+    access_token = None
+
     def __init__(self, client_id, client_secret, redirect_uri=None, **kwargs):
-        self.token = None  # reset
+        self.access_token = None  # reset
         self.client = OAuth2(client_id=client_id,
                              client_secret=client_secret,
                              site=self.site,
