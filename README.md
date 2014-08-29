@@ -8,6 +8,27 @@ Please use in conjunction with https://github.com/rosscdh/python-social-auth.git
 This will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
 ```
+#
+# Create an OAuth2 Session token
+#
+from goclio.clio import Session
+
+CLIENT_KEY = ':your_client_id'
+CLIENT_SECRET = ':your_client_secret'
+
+s = Session(client_id=CLIENT_KEY,
+            client_secret=CLIENT_SECRET)
+
+print s.auth_url
+>>> 'https://app.goclio.com//oauth/authorize?scope=%2Foauth%2Fauthorize&redirect_uri=None&response_type=code&client_id=:your_client_id'
+
+token = s.token_from_code(code='xrwrfDHdHtOYLs2NZejJ')
+
+#
+# Use the token provided above to use the api in the following manner
+#
+
+
 from goclio.clio import Me
 s=Me(token=':token')
 s.get()

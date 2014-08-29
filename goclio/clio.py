@@ -3,6 +3,31 @@ import json
 import requests
 import urlparse
 
+from requests_oauth2 import OAuth2
+
+class Session(object):
+    site = 'https://app.goclio.com/'
+    authorization_url = '/oauth/authorize'
+    token_url = '/oauth/token'
+    response_type = 'code'
+    token = None
+    def __init__(self, client_id, client_secret, redirect_uri=None, **kwargs):
+        self.token = None  # reset
+        self.client = OAuth2(client_id=client_id,
+                             client_secret=client_secret,
+                             site=self.site,
+                             redirect_uri=redirect_uri,
+                             authorization_url=kwargs.get('authorization_url', self.authorization_url),
+                             token_url=kwargs.get('token_url', self.token_url)) 
+    @property
+    def auth_url(self):
+        return self.client.authorize_url(self.authorization_url,
+                                         response_type=self.response_type)
+    def token_from_code(self, code):
+        self.token_response = self.client.get_token(code=code)
+        self.access_token = self.token_response.get('access_token')
+        return self.access_token
+
 
 class BaseApi(object):
     base_url = 'https://app.goclio.com/api/v2/'
