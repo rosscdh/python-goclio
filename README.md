@@ -41,12 +41,16 @@ s = Session(client_id=CLIENT_KEY,
 # this :code_value is then passed into the s.token_from_code(code=:code_value)
 #
 print s.auth_url
->>> 'https://app.goclio.com//oauth/authorize?scope=%2Foauth%2Fauthorize&redirect_uri=None&response_type=code&client_id=:your_client_id'
+>>> 'https://app.goclio.com/oauth/authorize?scope=%2Foauth%2Fauthorize&redirect_uri=None&response_type=code&client_id=:your_client_id'
 
+#
+# complete the process at the above url which will result in a code being presented to you.
+#
+
+token = s.token_from_code(code=':code')
+
+# you can also access the token via
 s.access_token  # Will give you access to the token
-# or 
-token = s.token_from_code(code='xrwrfDHdHtOYLs2NZejJ')
-
 
 #
 # Use the token provided above to use the api in the following manner
