@@ -5,7 +5,7 @@ python-goclio
 
 You are able to use the build in session object which will provide a simple wrapper for getting an OAuth2 token from goclio.
 
-Or you can use this module in conjunction with https://github.com/rosscdh/python-social-auth.git@backends/goclio (oauth2 implementation for goclio; has a pull request pending on the primary project).
+Or you can use this goclio module in conjunction with https://github.com/omab/python-social-auth Use the oauth2 implementation for the goclio backend.
 
 Either of these processes will then provide you with access to the ":token" which is the oauth2 token mentioned in the examples below.
 
