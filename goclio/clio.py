@@ -33,6 +33,14 @@ class Session(object):
         return self.access_token
 
 
+class EUSession(Session):
+    """
+    Class to handle European api requests. Due to goclio's setup and routing policy
+    a seperate eu class is required.
+    """
+    site = 'https://app.goclio.eu'
+
+
 class BaseApi(object):
     base_url = 'https://app.goclio.com/api/v2/'
     r = requests
