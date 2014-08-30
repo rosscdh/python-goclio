@@ -24,6 +24,11 @@ python setup.py install
 # Create an OAuth2 Session token
 #
 from goclio.clio import Session
+#
+# Please Note if you are in Europe you will need to use the
+# EUSession Object
+# from goclio.clio import EUSession as Session
+#
 
 CLIENT_KEY = ':your_client_id'
 CLIENT_SECRET = ':your_client_secret'
