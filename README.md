@@ -59,60 +59,77 @@ s.access_token  # Will give you access to the token
 
 
 from goclio.clio import Me
-s=Me(session=s)
+s = Me(session=s)
 s.get()
 
 
 from goclio.clio import Matters
-s=Matters(session=s)
+s = Matters(session=s)
 s.get()
 
 
+#
+# Create a matter
+#
 from goclio.clio import Matters
-m=Matters(session=s)
+m = Matters(session=s)
 m.post(client_id=882801947, description='a test matter', status='Open')
 
 
+#
+# Get single matter
+#
 from goclio.clio import Matters
-m=Matters(session=s, id=1025003373)
+m = Matters(session=s, id=1025003373)
 m.get()
 
 
 from goclio.clio import Documents
-dd=Documents(session=s)
+dd = Documents(session=s)
 dd.get()
 
 
 from goclio.clio import Documents
-d=Documents(session=s, id=28745759)
+d = Documents(session=s, id=28745759)
 d.document_versions()
 d.download_version(version_id=30613503)
 
 d.get()
-v=d.version(version_id=30613503)
+v = d.version(version_id=30613503)
 
 from goclio.clio import DocumentCategories
-dc=DocumentCategories(session=s)
+dc = DocumentCategories(session=s)
 dc.get()
 
 
 from goclio.clio import Contacts
-c=Contacts(session=s)
+c = Contacts(session=s)
 c.get()
 
 from goclio.clio import Notes
-n=Notes(session=s)
+n = Notes(session=s)
 n.get()
 
 from goclio.clio import Activities
-a=Activities(session=s)
+a = Activities(session=s)
 a.get()
 
 from goclio.clio import Bills
-b=Bills(session=s)
+b = Bills(session=s)
 b.get()
+```
+
+Pagination
+----------
+
+As per the goclio docs (http://api-docs.clio.com/v2/index.html#rest-api)
 
 ```
+from goclio.clio import Matters
+m = Matters(session=s)
+next_page = m.get(next_offset=:next_offset_from_previous_json_response_aata)
+```
+
 
 To paginate and basically do anythign via GET params (as per goclio api docs) pass in the desired param arguments as keyword arguments i.e. "s.get(offset=2)".
 
@@ -121,5 +138,5 @@ ToDo
 ----
 
 1. ~~Self contained session to provideo oauth2 token~~
-2. Examples of pagination and other api operators
+2. ~~Examples of pagination and other api operators~~
 3. Tests
