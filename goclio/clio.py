@@ -28,7 +28,8 @@ class Session(object):
         return self.client.authorize_url(self.authorization_url,
                                          response_type=self.response_type)
     def token_from_code(self, code):
-        self.token_response = self.client.get_token(code=code)
+        self.token_response = self.client.get_token(code=code,
+                                                    grant_type='authorization_code')
         self.access_token = self.token_response.get('access_token')
         return self.access_token
 
