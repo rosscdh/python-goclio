@@ -15,7 +15,7 @@ class Session(object):
     response_type = 'code'
     access_token = None
 
-    def __init__(self, client_id, client_secret, redirect_uri=None, **kwargs):
+    def __init__(self, client_id, client_secret, redirect_uri, **kwargs):
         self.access_token = None  # reset
         self.client = OAuth2(client_id=client_id,
                              client_secret=client_secret,
@@ -43,13 +43,17 @@ class EUSession(Session):
 
 
 class BaseApi(object):
-    base_url = 'https://app.goclio.com/api/v2/'
     r = requests
 
-    def __init__(self, token, **kwargs):
-        self.token = token
+    def __init__(self, session, **kwargs):
+        self.session = session
+        self.token = session.access_token
         self.response = self.response_json = {}
         self.params = kwargs
+
+    @property
+    def base_url(self):
+        return '%s/api/v2/' % self.session.site
 
     @property
     def auth(self):
@@ -143,27 +147,28 @@ class Documents(BaseApi):
 class DocumentCategories(BaseApi):
     uri = 'document_categories'
 
-# class Notes(BaseApi):
-#     uri = 'notes'
+
+class Notes(BaseApi):
+    uri = 'notes'
 
 
-# class Contacts(BaseApi):
-#     uri = 'contacts'
+class Contacts(BaseApi):
+    uri = 'contacts'
 
 
-# class Activities(BaseApi):
-#     uri = 'activities'
+class Activities(BaseApi):
+    uri = 'activities'
 
-#     class Descriptions(BaseApi):
-#         uri = 'activity_descriptions'
-
-
-# class Bills(BaseApi):
-#     uri = 'bills'
+    class Descriptions(BaseApi):
+        uri = 'activity_descriptions'
 
 
-# class Calendars(BaseApi):
-#     uri = 'calendars'
+class Bills(BaseApi):
+    uri = 'bills'
 
-#     class Entries(BaseApi):
-#         uri = 'calendar_entries'
+
+class Calendars(BaseApi):
+    uri = 'calendars'
+
+    class Entries(BaseApi):
+        uri = 'calendar_entries'

@@ -34,7 +34,8 @@ CLIENT_KEY = ':your_client_id'
 CLIENT_SECRET = ':your_client_secret'
 
 s = Session(client_id=CLIENT_KEY,
-            client_secret=CLIENT_SECRET)
+            client_secret=CLIENT_SECRET,
+            redirect_uri='https://yourserver.com/oauth2/code')
 
 #
 # Follow the url below, complete the process and copy the "code=:code_value" in the url
@@ -58,32 +59,32 @@ s.access_token  # Will give you access to the token
 
 
 from goclio.clio import Me
-s=Me(token=':token')
+s=Me(session=s)
 s.get()
 
 
 from goclio.clio import Matters
-s=Matters(token=':token')
+s=Matters(session=s)
 s.get()
 
 
 from goclio.clio import Matters
-m=Matters(token=':token')
+m=Matters(session=s)
 m.post(client_id=882801947, description='a test matter', status='Open')
 
 
 from goclio.clio import Matters
-m=Matters(token=':token', id=1025003373)
+m=Matters(session=s, id=1025003373)
 m.get()
 
 
 from goclio.clio import Documents
-s=Documents(token=':token')
-s.get()
+dd=Documents(session=s)
+dd.get()
 
 
 from goclio.clio import Documents
-d=Documents(token=':token', id=28745759)
+d=Documents(session=s, id=28745759)
 d.document_versions()
 d.download_version(version_id=30613503)
 
@@ -91,8 +92,26 @@ d.get()
 v=d.version(version_id=30613503)
 
 from goclio.clio import DocumentCategories
-s=DocumentCategories(token=':token')
-s.get()
+dc=DocumentCategories(session=s)
+dc.get()
+
+
+from goclio.clio import Contacts
+c=Contacts(session=s)
+c.get()
+
+from goclio.clio import Notes
+n=Notes(session=s)
+n.get()
+
+from goclio.clio import Activities
+a=Activities(session=s)
+a.get()
+
+from goclio.clio import Bills
+b=Bills(session=s)
+b.get()
+
 ```
 
 To paginate and basically do anythign via GET params (as per goclio api docs) pass in the desired param arguments as keyword arguments i.e. "s.get(offset=2)".
